@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="style.css">
+    
+    <title>SwithCUP</title>
+</head>
+<body>
+    <style>
+
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fc;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+    }
+        .navbarTab{
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            border-bottom: .1px solid rgb(228, 228, 228);
+            z-index: 2;
+        }
+        .navbar{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: auto;
+        }
+        .profile-section{
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .profile-options{
+            position: absolute;
+            border-radius: 0 15px 15px 15px;
+            width: 150px;
+            left: 40px;
+            top: 25px;
+            background: #f6f6f6;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        .profile-options ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .profile-options ul li{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px;
+            color: #555;
+            cursor: pointer;
+
+        }
+        .profile-options ul li:hover{
+            background-color: #ebebeb;
+        }
+        .profile-options ul li a{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #555;
+            text-decoration: none;
+        }
+        .profile{
+            background: whitesmoke;
+            border: 1px solid gray;
+            border-radius: 50% !important;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container-s{
+            background-color: #dfdfdf;
+            display: flex;
+            padding: 10px;
+        }
+        .sideBar{
+            flex: .2;
+            background-color: #fff;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+        .filter-section{
+            padding: 10px;
+        }
+        #categoriesList{
+            list-style: none;
+            padding: 0;
+            margin: 0 0 0 10px;
+        }
+        .main_container{
+           background-color: #eeeeee;
+            flex: 0.8;
+            margin-left: 10px;
+            /* position: relative; */
+            padding: 10px;
+            /* margin-top: 80px; */
+        }
+        .search-section {
+            border: 1px solid #c6c6c6;
+            padding: 4px 8px;
+            border-radius: 17px;
+            margin: 0 5px;
+            width: 500px;
+            /* position: absolute; */
+            /* top: -70px; */
+        }
+        .search-section input{
+            background-color: transparent;
+            border: none;
+            outline: none;
+            margin-left: 10px;
+        }
+        .productContainer{
+        margin-top: 20px;
+        }
+        .productList{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+        .product-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* display: flex; */
+  width: 350px;
+  transition: transform 0.3s;
+  margin: auto;
+  height: 500px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image{
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-image img {
+  width: 45%;
+  /* height: 300px; */
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.product-info {
+  padding: 16px;
+  flex: 1;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  white-space: nowrap;             
+  overflow: hidden;                
+  text-overflow: ellipsis; 
+}
+
+.product-category {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.product-description {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.rating {
+  font-size: 14px;
+  margin-bottom: 16px;
+  
+}
+.rate{
+    background: #02ad02;
+    padding: 2px 5px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 10px;
+}
+
+.add-to-cart {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+  background-color: #0056b3;
+}
+.dark-mode {
+        background-color: #2c3e50 !important;
+        color: #ecf0f1;
+    }
+    </style>
+
+    <div>
+    <div class="navbarTab">
+
+        <nav class="navbar">
+            <div>
+                <h1>SwithCUP</h1>
+            </div>
+            <div class="profile-section" >
+                <div id="profile" class="profile">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div id="profile-options" class="profile-options" >
+                    <ul>
+                        <li onclick="toggleDarkMode()"> <span><i class="fa-regular fa-moon"></i></span> Dark Mode</li>
+                        <li id="likedItem"><a href="Liked.html"> <span><i class="fa-regular fa-heart"></i></span>Liked Item</a></li>
+                        <li onclick="logout()" > <span><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Log Out</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container-s">
+
+
+        <div class="sideBar">
+
+            <div class="filter-section" >
+                <span style="font-size: 20px; font-weight: 500; " >Filtter</span>
+                <div id="Categorys" >
+                    <ul id="categoriesList" >
+                     
+                    </ul>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <span style="font-size: 20px; font-weight: 500; ">Price</span>
+                <div>
+                    <select style="width:45% ; outline: none;" name="min" id="MinPrice">
+                        <option value="">10</option>
+                        <option value="">50</option>
+                        <option value="">100</option>
+                    </select>
+                    <span style="color: rgba(128, 128, 128, 0.558);">To</span>
+                    <select style="width:45% ; outline: none;" name="max" id="MaxPrice">
+                        <option value="">100</option>
+                        <option value="">200</option>
+                        <option value="">300</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="main_container" >
+
+            <div class="search-section">
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input id="searItem" type="text" placeholder="Search..." >
+            </div>
+
+            <div class="productContainer">
+               <div id="productList" class="productList" ></div>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    
+    <script>
+
+// const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+// console.log(isLoggedIn)
+// if (!isLoggedIn) {
+//     window.location.href = 'login.html'; 
+// }
+        const profile = document.getElementById('profile');
+        const profile_options = document.getElementById('profile-options');
+        const Categorys = document.getElementById('Categorys');
+        const likedItem = document.getElementById('likedItem');
+        const searItem = document.getElementById('searItem');
+        let profile_status = false;
+        let categoryArr = [];
+        let productArr = [];
+
+
+        if(profile_status == false) profile_options.style.display = 'none';
+
+        profile.addEventListener('click' , ()=>{
+
+            profile_status = profile_status ? false : true;
+            console.log(profile_status); 
+            // profile.style.display = 'none';
+            profile_status ? profile_options.style.display = 'block' : profile_options.style.display = 'none';
+
+
+        })
+
+        const fetchCategoreys = async ()=>{
+
+            const res =  await fetch("https://fakestoreapi.com/products/categories");
+            const data = await res.json();
+            categoryArr = [...data];
+
+            // console.log(categoryArr);
+        }
+        fetchCategoreys().then(()=>{
+
+            let result = '<li> <input type="checkbox"> <span style="margin-right : 5px" >All</span> </li>';
+            categoryArr.forEach((item, index)=>{
+
+                result+= `
+                <li> <input type='checkbox'> <span style='margin-right : 5px' >${item}</span> </li>
+                `
+
+            })
+
+            document.getElementById('categoriesList').innerHTML = result;
+
+        
+        }).catch((err)=>console.log(err));
+
+
+
+
+
+        const fetchProducts = async (cat)=>{
+
+            let res 
+            if(cat!='all'){   res =  await fetch(`https://fakestoreapi.com/products/category/${cat}`);}
+            else{  res =  await fetch(`https://fakestoreapi.com/products/`);}
+            
+            const data = await res.json();
+            productArr = [data];
+            // console.log(productArr)
+        }
+        fetchProducts('all').then(()=>{
+
+            let result = '';
+            productArr[0].forEach((item, index)=>{
+
+                result+= `
+               <div class="product-card">
+                    <div class="product-image">
+                    <img src='${item.image}' loading='lazy' width='200' alt="Product Image" >
+                    </div>
+                    <div class="product-info">
+                    <p class="product-category">${item.category}</p>
+
+                    <h2 class="product-title">${item.title}</h2>
+                  
+                    <p class="product-price">$${item.price}</p>
+                    <div class="rating">
+                        <span class="rate"> <i class="fa-regular fa-star"></i> ${item.rating.rate}  </span>
+                    </div>
+                    <button onclick='viewDetails(${item.id})' style='background: #dadaff;border: none;padding: 7px;border-radius: 20px;font-size: 12px;' >View Details</button>
+                    <i style='cursor:pointer'id='like-btn-${index}' onclick='addToFav(${item.id})' class="fa-regular fa-heart"></i>
+                    </div>
+                </div>
+                `
+
+            })
+
+            document.getElementById('productList').innerHTML = result;
+
+        }).catch((err)=>console.log(err));
+
+
+        searItem.addEventListener('change', (e)=>{
+
+            let cat = e.target.value; 
+            fetchProducts(cat);
+            console.log("h")
+
+        })
+
+        function addToFav(productId) {
+
+            console.log(productId)
+    
+    let likedItems = JSON.parse(localStorage.getItem('likedItems')) || [];
+
+    if (!likedItems.includes(productId)) {
+        likedItems.push(productId);  
+        localStorage.setItem('likedItems', JSON.stringify(likedItems)); 
+
+        document.querySelector(`#like-btn-${productId}`).style.color = 'red';  
+    } else {
+        likedItems = likedItems.filter(item => item !== productId);
+        localStorage.setItem('likedItems', JSON.stringify(likedItems)); 
+
+        document.querySelector(`#like-btn-${productId}`).style.color = 'black';  
+    }
+}
+
+
+        function logout() {
+            // Clear user data from localStorage
+            localStorage.removeItem('currentUser');
+            alert('You have been logged out.');
+            window.location.href = 'login.html'; // Redirect to login page
+        }
+
+
+        const currentUser = JSON.parse(localStorage.getItem('users'));
+        if (currentUser) {
+            document.getElementById('profile').innerHTML = currentUser[0].username[0];
+        } 
+
+
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            // Save the current theme preference to localStorage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Apply the saved theme from localStorage on page load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        };
+
+
+        function viewDetails(id){
+            console.log(id)
+            window.location.href = `ViewDetails.html?id=${id}`;
+        }
+
+    </script>
+</body>
+</html>
+
+<!-- <p class="product-description">
+    ${item.description}
+    <button class="add-to-cart">Add to Cart</button>
+ </p> -->

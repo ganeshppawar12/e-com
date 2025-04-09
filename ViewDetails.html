@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Product Details</title>
+    <style>
+        /* Reset some basic styling */
+        body, h1, h2, p, img {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Card container */
+        .product-card {
+            width: 350px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Product Image */
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        /* Product Details */
+        .product-details {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 500;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #7f8c8d;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .product-category {
+            font-size: 14px;
+            font-weight: bold;
+            color: #34495e;
+            background-color: #ecf0f1;
+            padding: 5px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .product-rating span {
+            font-size: 16px;
+            color: #f39c12;
+            margin-left: 5px;
+        }
+
+        /* Button Style */
+        .buy-btn {
+            padding: 12px 20px;
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background-color: #2ecc71;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Product Details Card -->
+    <div class="product-card">
+        <!-- Product Image -->
+        <img class="product-image" id="product-image" src="" alt="Product Image">
+
+        <!-- Product Details -->
+        <div class="product-details">
+            <h1 id="product-title">Product Title</h1>
+            <p class="product-price" id="product-price">$0.00</p>
+            <p class="product-description" id="product-description">Product description goes here. It explains the product in a short, clear way.</p>
+            <p class="product-category" id="product-category">Category</p>
+
+            <!-- Product Rating -->
+            <div class="product-rating">
+                <span id="product-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+
+            <!-- Buy Button -->
+            <button class="buy-btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+      
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+       
+        const productId = getQueryParam('id');
+
+        fetch(`https://fakestoreapi.com/products/${productId}`)
+            .then(response => response.json())
+            .then(data => {
+                
+                document.getElementById('product-title').innerText = data.title;
+                document.getElementById('product-price').innerText = `$${data.price.toFixed(2)}`;
+                document.getElementById('product-description').innerText = data.description;
+                document.getElementById('product-category').innerText = data.category;
+                document.getElementById('product-rating').innerText = '⭐'.repeat(Math.round(data.rating.rate)); // Display the stars
+                document.getElementById('product-image').src = data.image;
+            })
+            .catch(error => {
+                console.error('Error fetching product data:', error);
+            });
+    </script>
+
+</body>
+</html>
